@@ -1,0 +1,62 @@
+#mini-play-box {
+}
+
+#mini-play-img {
+  width: 80px;
+  height: 80px;
+  background:url("../../images/music/mini-player-default.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+#song-play-button {
+  margin: auto;
+  position: relative;
+  top: 28px;
+  left: -1px;
+  width: 30px;
+  height: 30px;
+  background:url("../../images/music/mini-play-white.png") no-repeat;
+  background-size: 100% 100%;
+  cursor:pointer;
+
+}
+#song-pause-button {
+  margin: auto;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-image:url("../../images/music/mini-pause-white.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  cursor:pointer;
+
+}
+
+#mini-play-song-info {
+  position: relative;
+  top: -80px;
+  left: 80px;
+  width: 350px;
+  height: 40px;
+  background-color: #8D4294;
+}
+
+#song-play-time {
+  position: relative;
+  top: -120px;
+  left: 430px;
+
+  width: 100px;
+  height: 40px;
+  background-color: #C20C0C;
+}
+
+#progress-bar {
+  position: relative;
+  top: -120px;
+  left: 80px;
+
+  width: 450px;
+  height: 40px;
+  background-color: #B8B8B8;
+}

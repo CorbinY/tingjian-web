@@ -1,0 +1,52 @@
+#music-info-box {
+  padding-top: 20px;
+  height: 220px;
+  width: 800px;
+  box-shadow: 0 0 4px #ddd;
+}
+
+#song-name {
+  height: 45px;
+  background-color: #9E61A3;
+  color: #000000;
+  font-family: 'Serif','萍方粗';
+  font-size: 1.5em;
+  font-style: italic;
+  padding-left: 1.5em;
+  text-align: left;
+  padding-top: 5px;
+}
+
+#recommend-word {
+  height: 50px;
+  background-color: #9E61A3;
+}
+
+#player {
+  width: 600px;
+  position: relative;
+  padding-top: 10px;
+}
+
+#user-action {
+  width: 210px;
+  height: 66px;
+  position: relative;
+  top: -71px;
+  left: 590px;
+}
+
+#collect-love {
+  width: 105px;
+  height: 66px;
+  text-align: center;
+}
+
+#to-star {
+  width: 105px;
+  height: 66px;
+  position: relative;
+  top: -66px;
+  left: 105px;
+
+}

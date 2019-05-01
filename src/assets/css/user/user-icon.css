@@ -1,0 +1,7 @@
+#login_user {
+  width: 35px;
+  height: 35px;
+  /*background-color: #080808;*/
+  background: url("../../images/user/un-login.png") no-repeat;
+  background-size: 100% 100%;
+}

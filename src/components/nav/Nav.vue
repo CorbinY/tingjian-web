@@ -1,0 +1,109 @@
+<template>
+  <div id="nav_box">
+    <div id="nav_top_img"></div>
+    <div id="nav_top_bar">
+      <ul>
+        <li
+          v-for="(item,index) in list"
+          @click="getSongList(index)">
+          {{item}}
+        </li>
+      </ul>
+      <!-- <ul>
+         <li @click="skipPageNav('/login')">今日热点</li>&lt;!&ndash;播放次数最多的 MostListen&ndash;&gt;
+         <li @click="skipPageNav('/login')">新歌速递</li> &lt;!&ndash;NewSong&ndash;&gt;
+         <li @click="skipPageNav('/login')">热门神曲</li>&lt;!&ndash;点赞最多 MostStar&ndash;&gt;
+         <li @click="skipPageNav('/login')">爱豆之家</li>&lt;!&ndash; Singer&ndash;&gt;
+         <li @click="skipPageNav('/login')">心动模式</li>&lt;!&ndash;TingJian&ndash;&gt;
+         <li @click="skipPageNav('/login')">个人私藏</li>&lt;!&ndash;MyLoveSong &ndash;&gt;
+         <li @click="skipPageNav('/login')">账号中心</li>&lt;!&ndash;MyAccount &ndash;&gt;
+       </ul>-->
+    </div>
+  </div>
+</template>
+
+<script>
+  import LocalStorage from "../../../config/LocalStorage";
+  import Common from "../../../config/Common";
+
+  export default {
+    name: "Nav",
+    data() {
+      return {
+        list: ['今日热点', '新歌速递', '热门神曲', '爱豆之家', '心动模式', '个人私藏', '账号中心'],
+        ind: '',
+        "result": {
+          "content": [],
+          "pageable": {
+            "sort": {
+              "unsorted": true,
+              "sorted": false,
+              "empty": true
+            },
+            "pageSize": 1,
+            "pageNumber": 0,
+            "offset": 0,
+            "unpaged": false,
+            "paged": true
+          },
+          "totalElements": 2,
+          "totalPages": 2,
+          "last": false,
+          "first": true,
+          "sort": {
+            "unsorted": true,
+            "sorted": false,
+            "empty": true
+          },
+          "numberOfElements": 1,
+          "size": 1,
+          "number": 0,
+          "empty": false
+        },
+      }
+    },
+    methods: {
+      getSongList(index) {
+
+        //发布nav导航信息
+        LocalStorage.set('tagName',this.list[index]);
+     //   alert(storage.get('tagName'));
+
+        if (index ===0) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/index");
+
+
+        } else if (index === 1) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/last/shelf");
+
+        } else if (index === 2) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/hot/song");
+
+        } else if (index === 3) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/singer/song");
+
+        } else if (index === 4) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/tingjian");
+        } else if (index === 5) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/collect");
+        } else if (index === 6) {
+          LocalStorage.remove("songDataList");
+          this.$router.push("/login");
+        }
+
+      }
+    }
+
+  }
+
+</script>
+
+<style scoped>
+  @import "../../assets/css/nav/nav.css";
+</style>
