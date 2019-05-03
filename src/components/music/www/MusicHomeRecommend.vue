@@ -24,6 +24,7 @@
   import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
   import Axios from "axios";
+  import  VueEvent from "../../../../config/VueEvent";
 
   export default {
     name: "MusicHomeRecommend",
@@ -31,9 +32,19 @@
     data() {
       return {
         songDataList:{content:[]} ,
-
+        tagName:''
       }
-    }, mounted() {
+    },beforeCreate() {
+
+    }
+    ,mounted() {
+      //发布nav导航信息
+      // LocalStorage.set('tagName', this.constant.musicHomeRecommend.navName);
+      // VueEvent.$emit('tagName',LocalStorage.get('tagName'));
+      // alert(LocalStorage.get('tagName'));
+      // this.tagName=this.constant.musicHomeRecommend.navName;
+      // VueEvent.$emit('tagName',this.tagName);
+
       Axios.post(this.constant.musicHomeRecommend.api,this.constant.page).then(response=>{
         this.songDataList=response.data.result;
         LocalStorage.set("songDataList", response.data.result);

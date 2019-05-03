@@ -6,7 +6,13 @@ import router from './router'
 import Constant from '../config/constant'
 
 Vue.prototype.constant = Constant;
-
+/**
+ * 用户获取的歌曲列表   localStorage.set("songDataList",songDataList)
+ * 用户的信息,不包含密码         localStorage.set("userInfo",userInfo)
+ * 每次请求接口，都要包含userid参数，
+ * 当用户未登录时，默认传递缓存中的userId，
+ * 为登录时，缓存中的userId默认为0
+ */
 new Vue({
   el: '#app',
   router,

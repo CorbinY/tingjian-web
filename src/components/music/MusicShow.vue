@@ -10,10 +10,10 @@
       </div>
       <div id="user-action">
         <div id="collect-love">
-          <button class="btn1" :style="{backgroundImage:'url('+loveCollectImg+')'}" @click="changeLoveStatus()"></button>
+          <button class="btn1" :style="{backgroundImage:'url('+loveCollectImg+')'}" @click="changeLoveStatus(!loveCollectStatus)"></button>
         </div>
         <div id="to-star">
-          <button class="btn2" :style="{backgroundImage:'url('+loveStarImg+')'}" @click="changeStarStatus()"></button>
+          <button class="btn2" :style="{backgroundImage:'url('+loveStarImg+')'}" @click="changeStarStatus(!loveStarStatus)"></button>
 
         </div>
       </div>
@@ -30,7 +30,10 @@
     components: {MusicPlayMini},
     data() {
       return {
+        loveCollectStatus:false,
         loveCollectImg: require('../../assets/images/icon/love_grey.png'),
+
+        loveStarStatus:false,
         loveStarImg: require('../../assets/images/icon/star-grey.png'),
         songInfo:LocalStorage.get("songDataList").content[this.songInfoIndex],
 
@@ -38,11 +41,23 @@
     },
     methods: {
       //
-      changeLoveStatus(){
+      changeLoveStatus(loveCollectStatus){
+        this.loveCollectStatus=loveCollectStatus;
 
+        if (loveCollectStatus===true){
+          this.loveCollectImg=require('../../assets/images/icon/love.png');
+        } else {
+          this.loveCollectImg=require('../../assets/images/icon/love_grey.png');
+        }
 
       },
-      changeStarStatus(){
+      changeStarStatus(loveStarStatus){
+        this.loveStarStatus=loveStarStatus;
+        if (loveStarStatus===true){
+          this.loveStarImg=require('../../assets/images/icon/star.png');
+        } else {
+          this.loveStarImg=require('../../assets/images/icon/star-grey.png');
+        }
       },
 
     },

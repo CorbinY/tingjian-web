@@ -24,20 +24,28 @@
   import Footer from "@/components/frame/Footer";
   import Axios from "axios";
   import LocalStorage from "../../../../config/LocalStorage";
+  import  VueEvent from "../../../../config/VueEvent";
 
   export default {
     name: "MusicHomeLastSong",
     components: {MusicShow, FrameBox, Footer},
     data() {
       return {
-        songDataList: {content: []}
-
+        songDataList: {content: []},
+        tagName:''
 
       }
+    }, beforeCreate() {
     }, mounted() {
-      Axios.post(this.constant.musicHomeLastSong.api,this.constant.page).then(response=>{
-        this.songDataList=response.data.result;
+      //发布nav导航信息
+    //  LocalStorage.set('tagName', this.constant.musicHomeLastSong.navName);
+    //   this.tagName=this.constant.musicHomeLastSong.navName;
+    //   VueEvent.$emit('tagName',this.tagName);
+
+      Axios.post(this.constant.musicHomeLastSong.api, this.constant.page).then(response => {
+        this.songDataList = response.data.result;
         LocalStorage.set("songDataList", response.data.result);
+
       });
     }
 

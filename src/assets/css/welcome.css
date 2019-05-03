@@ -1,13 +1,37 @@
 html, body {
   position: relative;
 }
+
+#welcomeShow1 {
+  line-height: 3em;
+  text-indent: 2em;
+  font-family: "新宋体";
+  color: white;
+  font-size: 300%;
+  width: 100%;
+  min-width: 1250px;
+  height: 250px;
+  background: url("../../assets/images/welcome/introduce/welcomeShow1.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+
+#welcomeShow2 {
+  width: 100%;
+  min-width: 1250px;
+  height: 300px;
+  background: url("../../assets/images/welcome/introduce/welcomeShow2.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+
 a {
   text-decoraction: none;
 }
+
 .router-link-active {
   text-decoration: none;
   color: rgb(255, 255, 255);
 }
+
 hr {
   width: 80%;
   height: 1px;
@@ -17,11 +41,15 @@ hr {
 
 #globle {
   width: 100%;
-  height: 100%;
+  height: 800px;
   background-color: #080808;
+  position: relative;
+  top: -170px;
 }
 
 #top_title {
+  position: relative;
+  top: 0px;
   width: 100%;
   height: 6%;
   font-family: "宋体";
@@ -33,12 +61,14 @@ hr {
 }
 
 #title_des {
-  width: 100%;
-  height: 20%;
-  background-image: url(../images/welcome/7.png);
+  width: 300px;
+  height: 25px;
+  position: relative;
+  left: 300px;
+  top: -10px;
+  background-image: url(../images/welcome/3.png);
   background-repeat: no-repeat;
-  background-position-x: center;
-  background-position-y: center;
+  background-size: 100% 100%;
 }
 
 #slogan {
@@ -46,11 +76,14 @@ hr {
   font-family: "新宋体";
   color: #555555;
   font-size: 200%;
-  text-indent: 37%;
+  text-align: center;
   line-height: 20px;
-  margin-top: 2%;
+  position: relative;
+  top: 50px;
+
 
 }
+
 
 #entrance {
   cursor: pointer;
@@ -63,8 +96,8 @@ hr {
   line-height: 50px;
   border: 1px solid rgb(135, 98, 56);
   font-family: SimSun;
-
-
+  position: relative;
+  top: 50px;
 }
 
 #entrance:hover {
@@ -72,10 +105,40 @@ hr {
 
 }
 
+
 #content-img {
   width: 576px;
   height: 451px;
   background-image: url(../images/welcome/mac-phone.png);
   background-repeat: no-repeat;
   margin: auto;
+  position: relative;
+  top: 70px;
 }
+
+#singerShow {
+  position: relative;
+  top: -50px;
+  width: 100%;
+  min-width: 1250px;
+  height: 700px;
+  background: url("../../assets/images/welcome/introduce/singerShow.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+#singerShowIntroduce {
+  line-height: 300px;
+  font-family: "pingfangSS";
+  text-indent: 25.5em;
+  color: #555555;
+  font-size: 150%;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  min-width: 1250px;
+  height: 180px;
+  background: url("../../assets/images/welcome/introduce/singerShowIntroduce.png") no-repeat;
+  background-size: 100% 100%;
+
+}
+

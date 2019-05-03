@@ -8,6 +8,7 @@ import MusicHomeHotSong from "@/components/music/www/MusicHomeHotSong";
 import MusicHomeMyTingjian from "@/components/music/www/MusicHomeMyTingjian";
 import MusicHomeMyCollect from "@/components/music/www/MusicHomeMyCollect";
 import MusicHomeSingerSong from "@/components/music/www/MusicHomeSingerSong";
+import Register from "@/components/user/login/Register";
 
 
 Vue.use(Router);
@@ -55,6 +56,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },{
+      //账号中心
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ]
 })

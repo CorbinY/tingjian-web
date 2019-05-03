@@ -32,71 +32,95 @@
       return {
         list: ['今日热点', '新歌速递', '热门神曲', '爱豆之家', '心动模式', '个人私藏', '账号中心'],
         ind: '',
-        "result": {
-          "content": [],
-          "pageable": {
-            "sort": {
-              "unsorted": true,
-              "sorted": false,
-              "empty": true
-            },
-            "pageSize": 1,
-            "pageNumber": 0,
-            "offset": 0,
-            "unpaged": false,
-            "paged": true
-          },
-          "totalElements": 2,
-          "totalPages": 2,
-          "last": false,
-          "first": true,
-          "sort": {
-            "unsorted": true,
-            "sorted": false,
-            "empty": true
-          },
-          "numberOfElements": 1,
-          "size": 1,
-          "number": 0,
-          "empty": false
-        },
+        // "result": {
+        //   "content": [],
+        //   "pageable": {
+        //     "sort": {
+        //       "unsorted": true,
+        //       "sorted": false,
+        //       "empty": true
+        //     },
+        //     "pageSize": 1,
+        //     "pageNumber": 0,
+        //     "offset": 0,
+        //     "unpaged": false,
+        //     "paged": true
+        //   },
+        //   "totalElements": 2,
+        //   "totalPages": 2,
+        //   "last": false,
+        //   "first": true,
+        //   "sort": {
+        //     "unsorted": true,
+        //     "sorted": false,
+        //     "empty": true
+        //   },
+        //   "numberOfElements": 1,
+        //   "size": 1,
+        //   "number": 0,
+        //   "empty": false
+        // },
       }
     },
     methods: {
       getSongList(index) {
+        LocalStorage.set('tagName', this.list[index]);
 
-        //发布nav导航信息
-        LocalStorage.set('tagName',this.list[index]);
-     //   alert(storage.get('tagName'));
+        //清楚缓存歌曲,每次跳转更细歌曲
+        LocalStorage.remove("songDataList");
+        var userId = LocalStorage.get("userId");
 
-        if (index ===0) {
-          LocalStorage.remove("songDataList");
+        if (index === 0) {
           this.$router.push("/index");
-
-
         } else if (index === 1) {
-          LocalStorage.remove("songDataList");
           this.$router.push("/last/shelf");
 
         } else if (index === 2) {
-          LocalStorage.remove("songDataList");
           this.$router.push("/hot/song");
 
         } else if (index === 3) {
-          LocalStorage.remove("songDataList");
-          this.$router.push("/singer/song");
+          if (userId === 0) {
+            this.pleaseLogin();
+          } else {
+            this.$router.push("/singer/song");
+          }
 
         } else if (index === 4) {
-          LocalStorage.remove("songDataList");
-          this.$router.push("/tingjian");
+          if (userId === 0) {
+            this.pleaseLogin();
+          } else {
+            this.$router.push("/tingjian");
+          }
+
         } else if (index === 5) {
-          LocalStorage.remove("songDataList");
-          this.$router.push("/collect");
+          if (userId === 0) {
+            this.pleaseLogin();
+          } else {
+            this.$router.push("/collect");
+          }
+
         } else if (index === 6) {
-          LocalStorage.remove("songDataList");
-          this.$router.push("/login");
+          if (userId === 0){
+            this.$router.push("/login");
+          } else {
+            alert("已登录");
+          }
+
         }
 
+      },
+      pleaseLogin() {
+        alert("请登陆后使用本功能");
+        this.$router.push("/login");
+      },
+      isUserLogined(userId) {
+
+      }
+
+    }, mounted() {
+      //默认userId=0
+      if (LocalStorage.get("userId") == null) {
+        LocalStorage.set("userId", 0);
       }
     }
 
