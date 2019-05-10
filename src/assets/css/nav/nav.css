@@ -1,7 +1,7 @@
 .bg-img {
   width: 100%;
   height: 100%;
-  background: url('http://cn.bing.com/ImageResolution.aspx?h=768&w=1366'), url(../../images/nav/default.jpg) no-repeat;
+  background: url('http://cn.bing.com/ImageResolution.aspx?h=768&w=1366'), url(../../images/nav/th.jpg) no-repeat;
 
 }
 
@@ -13,8 +13,15 @@
 }
 
 #nav_top_img {
+  font-family: "宋体";
+  font-size: 150%;
+  text-indent: 60%;
+  line-height: 340px;
+  color: white;
+  letter-spacing: 10px;
   height: 200px;
-  background: url('http://cn.bing.com/ImageResolution.aspx?h=768&w=1366'), url(../../images/nav/default.jpg) no-repeat;
+  /*background: url('http://cn.bing.com/ImageResolution.aspx?h=768&w=1366'), url(../../images/nav/default.jpg) no-repeat;*/
+  background: url(../../images/nav/th.jpg) no-repeat;
 }
 
 #nav_top_bar {

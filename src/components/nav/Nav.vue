@@ -1,6 +1,9 @@
 <template>
   <div id="nav_box">
-    <div id="nav_top_img"></div>
+    <div id="nav_top_img">
+     <img src="../../assets/images/nav/navImg2.png" width="400" height="60">
+     <!-- 听/见/余/声  <br> 听/鉴/余/生-->
+    </div>
     <div id="nav_top_bar">
       <ul>
         <li
@@ -25,6 +28,7 @@
 <script>
   import LocalStorage from "../../../config/LocalStorage";
   import Common from "../../../config/Common";
+  import Axios from "axios";
 
   export default {
     name: "Nav",
@@ -32,43 +36,25 @@
       return {
         list: ['今日热点', '新歌速递', '热门神曲', '爱豆之家', '心动模式', '个人私藏', '账号中心'],
         ind: '',
-        // "result": {
-        //   "content": [],
-        //   "pageable": {
-        //     "sort": {
-        //       "unsorted": true,
-        //       "sorted": false,
-        //       "empty": true
-        //     },
-        //     "pageSize": 1,
-        //     "pageNumber": 0,
-        //     "offset": 0,
-        //     "unpaged": false,
-        //     "paged": true
-        //   },
-        //   "totalElements": 2,
-        //   "totalPages": 2,
-        //   "last": false,
-        //   "first": true,
-        //   "sort": {
-        //     "unsorted": true,
-        //     "sorted": false,
-        //     "empty": true
-        //   },
-        //   "numberOfElements": 1,
-        //   "size": 1,
-        //   "number": 0,
-        //   "empty": false
-        // },
+        loginStatus: false,
+
+        userInfo: {
+          userName: '',
+          userId: 0,
+          userMail: '',
+          userAccount: '',
+          userDesc: '',
+          userSex: 0,
+          userHeadPortrait: ''
+        }
       }
     },
     methods: {
-      getSongList(index) {
+      async getSongList(index) {
         LocalStorage.set('tagName', this.list[index]);
 
         //清楚缓存歌曲,每次跳转更细歌曲
         LocalStorage.remove("songDataList");
-        var userId = LocalStorage.get("userId");
 
         if (index === 0) {
           this.$router.push("/index");
@@ -79,49 +65,64 @@
           this.$router.push("/hot/song");
 
         } else if (index === 3) {
-          if (userId === 0) {
-            this.pleaseLogin();
-          } else {
+          //用户登录状态
+          await this.checkUserLogin();
+          //验证是否登录
+          if (this.loginStatus === true) {
             this.$router.push("/singer/song");
           }
-
         } else if (index === 4) {
-          if (userId === 0) {
-            this.pleaseLogin();
-          } else {
+          //验证是否登录
+          //用户登录状态
+          await this.checkUserLogin();
+          if (this.loginStatus === true) {
             this.$router.push("/tingjian");
           }
-
         } else if (index === 5) {
-          if (userId === 0) {
-            this.pleaseLogin();
-          } else {
+          //用户登录状态
+          await this.checkUserLogin();
+          //验证是否登录
+          if (this.loginStatus === true) {
             this.$router.push("/collect");
           }
-
         } else if (index === 6) {
-          if (userId === 0){
-            this.$router.push("/login");
+          //用户登录状态
+          await this.checkUserLogin();
+          //验证是否登录
+          if (this.loginStatus === true) {
+            this.$router.push("/user-info");
           } else {
-            alert("已登录");
+            this.$router.push("/login");
           }
 
         }
 
       },
-      pleaseLogin() {
-        alert("请登陆后使用本功能");
-        this.$router.push("/login");
-      },
-      isUserLogined(userId) {
 
-      }
+      async checkUserLogin() {
+        if (this.userInfo.userId === 0) {
+          alert("请登录后使用本功能");
+          this.loginStatus = false;
+        } else {
+          var api = '/api/user/check/user/login-status';
+          await Axios.post(api, this.userInfo).then(response => {
+            if (response.data.code === 11003) {
+              alert("离线时间过长,登录失效,请先登录再使用收藏功能");
+              this.loginStatus = false;
+            } else if (response.data.code === 0) {
+              this.loginStatus = true;
+            }
+          });
+        }
+      },
 
     }, mounted() {
-      //默认userId=0
-      if (LocalStorage.get("userId") == null) {
-        LocalStorage.set("userId", 0);
+      var userInfo = LocalStorage.get("userInfo");
+      if (userInfo == null) {
+        LocalStorage.set("userInfo", this.constant.touristsStatus);
+        userInfo = LocalStorage.get("userInfo");
       }
+      this.userInfo = userInfo;
     }
 
   }

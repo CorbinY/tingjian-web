@@ -5,7 +5,8 @@
         听鉴
       </div>
       <div id="welcomeShow2">
-        <span class="yinyuehao"> <img @click="skipToMainPage()" src="../assets/images/welcome/introduce/yinyuehao3.png" width="800" height="250px"></span>
+        <span class="yinyuehao"> <img @click="skipToMainPage()" src="../assets/images/welcome/introduce/yinyuehao3.png"
+                                      width="500" height="250px"></span>
       </div>
     </div>
 
@@ -54,10 +55,13 @@
         LocalStorage.set('tagName', this.constant.musicHomeRecommend.navName);
         // //请求今日热点歌曲
         // //先使用最新歌曲代替
-        var userId = LocalStorage.get("userId");
+        var userId = LocalStorage.get("userInfo").userId;
         if (userId == null) {
           //未登录
-          LocalStorage.set("userId", 0);
+          var userInfo={
+            userId:0
+          };
+          LocalStorage.set("userInfo",userInfo );
         }
 
         this.$router.push("/index");
@@ -73,21 +77,19 @@
 
 <style scoped>
   @import '../assets/css/welcome.css';
-  .homeFooter{
+
+  .homeFooter {
     width: 100%;
     min-width: 1250px;
     float: left;
-    margin-top: -170px;
+    margin-top: -50px;
     background-color: gray;
   }
-  .yinyuehao{
-    float: left;
-    height: 100px;
-    width: 100px;
-    margin: auto;
+
+  .yinyuehao {
     position: relative;
     left: 600px;
-    top: -100px;
+    top: -85px;
 
   }
 </style>

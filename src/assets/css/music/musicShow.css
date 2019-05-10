@@ -7,7 +7,7 @@
 
 #song-name {
   height: 45px;
-  background-color: #9E61A3;
+  /*background-color: #9E61A3;*/
   color: #000000;
   font-family: 'Serif','萍方粗';
   font-size: 1.5em;
@@ -19,7 +19,7 @@
 
 #recommend-word {
   height: 50px;
-  background-color: #9E61A3;
+  /*background-color: #9E61A3;*/
 }
 
 #player {
@@ -49,4 +49,7 @@
   top: -66px;
   left: 105px;
 
+}
+hr{
+  border-color: #C20C0C;
 }

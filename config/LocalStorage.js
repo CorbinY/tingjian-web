@@ -8,7 +8,6 @@
 var LocalStorage={
 
   set(key,value){
-
     localStorage.setItem(key, JSON.stringify(value));
   },
   get(key){
@@ -18,6 +17,6 @@ var LocalStorage={
     localStorage.removeItem(key);
   }
 
-}
+};
 
 export default LocalStorage;

@@ -10,10 +10,12 @@
       </div>
       <div id="user-action">
         <div id="collect-love">
-          <button class="btn1" :style="{backgroundImage:'url('+loveCollectImg+')'}" @click="changeLoveStatus(!loveCollectStatus)"></button>
+          <button class="btn1" :style="{backgroundImage:'url('+loveCollectImg+')'}"
+                  @click="changeLoveStatus(!songInfo.songCollectStatus)"></button>
         </div>
         <div id="to-star">
-          <button class="btn2" :style="{backgroundImage:'url('+loveStarImg+')'}" @click="changeStarStatus(!loveStarStatus)"></button>
+          <button class="btn2" :style="{backgroundImage:'url('+loveStarImg+')'}"
+                  @click="changeStarStatus(!loveStarStatus)"></button>
 
         </div>
       </div>
@@ -24,46 +26,134 @@
 <script>
   import MusicPlayMini from "@/components/music/MusicPlayMini";
   import LocalStorage from "../../../config/LocalStorage";
+  import Axios from 'axios';
+  import qs from "qs";
 
   export default {
     name: "MusicShow",
     components: {MusicPlayMini},
     data() {
       return {
-        loveCollectStatus:false,
+        userInfo: '',
         loveCollectImg: require('../../assets/images/icon/love_grey.png'),
 
-        loveStarStatus:false,
+        loveStarStatus: false,
         loveStarImg: require('../../assets/images/icon/star-grey.png'),
-        songInfo:LocalStorage.get("songDataList").content[this.songInfoIndex],
-
+        songInfo: {
+          songName: '',
+          songId: 0,
+          songRecommendWord: '',
+          songCollectStatus:false
+        }
       }
     },
     methods: {
       //
-      changeLoveStatus(loveCollectStatus){
-        this.loveCollectStatus=loveCollectStatus;
+      changeLoveStatus(loveCollectStatus) {
 
-        if (loveCollectStatus===true){
-          this.loveCollectImg=require('../../assets/images/icon/love.png');
+        var loginStatus = this.checkUserLogin();
+        if (loginStatus === false) {
+          return;
+        }
+
+        this.songInfo.songCollectStatus = loveCollectStatus;
+        if (this.songInfo.songCollectStatus === true) {
+          //收藏
+          this.addCollectSong(this.songInfo.songId,this.userInfo.userId);
+          this.loveCollectImg = require('../../assets/images/icon/love.png');
         } else {
-          this.loveCollectImg=require('../../assets/images/icon/love_grey.png');
+          //再次执行，取消收藏
+          this.delCollectSong(this.songInfo.songId,this.userInfo.userId);
+          this.loveCollectImg = require('../../assets/images/icon/love_grey.png');
         }
 
       },
-      changeStarStatus(loveStarStatus){
-        this.loveStarStatus=loveStarStatus;
-        if (loveStarStatus===true){
-          this.loveStarImg=require('../../assets/images/icon/star.png');
-        } else {
+      changeStarStatus(loveStarStatus) {
+        this.loveStarStatus = loveStarStatus;
+        if (loveStarStatus === true) {
+          var api = '/api/song/star';
+          var starSongResource={
+            userId:this.userInfo.userId,
+            songId:this.songInfo.songId
+          };
+
+          Axios.post(api, qs.stringify(starSongResource)).then(response => {
+          });
+          this.loveStarImg = require('../../assets/images/icon/star.png');
+        }/* else {
           this.loveStarImg=require('../../assets/images/icon/star-grey.png');
+        }*/
+      },
+
+      async checkUserLogin() {
+        var userId = LocalStorage.get('userInfo').userId;
+        let loginStatus = false;
+        if (userId === 0) {
+          alert("请登录后使用收藏功能");
+          loginStatus = false;
+          return loginStatus;
+        } else {
+          var api = '/api/user/check/user/login-status';
+          await Axios.post(api, LocalStorage.get("userInfo")).then(response => {
+            if (response.data.code === 11003) {
+              alert("离线时间过长,登录失效,请先登录再使用收藏功能");
+              loginStatus = false;
+            } else if (response.data.code === 0) {
+              loginStatus = true;
+            }
+          });
+          return loginStatus;
         }
       },
+      /**
+       * 添加收藏
+       * @param songId
+       * @param userId
+       * @returns {Promise<void>}
+       */
+      async addCollectSong(songId, userId) {
+        let api = '/api/song/add-collect-song';
+        let collectSongParam = {
+          userId: userId,
+          songId: songId
+        };
+        await Axios.post(api, qs.stringify(collectSongParam)).then(response => {
+          if (response.data.code != 0) {
+            alert("收藏失败");
+          } else {
+            this.songInfo.songCollectStatus = true;
+          }
+        });
+      },
+      /**
+       * 删除收藏
+       * @param songId
+       * @param userId
+       * @returns {Promise<void>}
+       */
+      async delCollectSong(songId, userId) {
+        let api = '/api/song/del-collect-song';
+        let collectSongParam = {
+          userId: userId,
+          songId: songId
+        };
+        await Axios.post(api, qs.stringify(collectSongParam)).then(response => {
+          if (response.data.code != 0) {
+            alert("删除收藏失败");
+          } else {
+            this.songInfo.songCollectStatus = false;
+          }
+        });
+      }
 
     },
-    props:['songInfoIndex'],
+    props: ['songInfoIndex'],
     created() {
-      //调用
+      this.songInfo = LocalStorage.get("songDataList").content[this.songInfoIndex];
+      this.userInfo = LocalStorage.get('userInfo');
+      if (this.songInfo.songCollectStatus==true){
+       this.loveCollectImg=require('../../assets/images/icon/love.png');
+      }
     }
   }
 </script>

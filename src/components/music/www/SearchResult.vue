@@ -17,6 +17,7 @@
       {{currentPage}} / {{totalPage}}
       <button @click="nextPage">下一页</button>
     </div>
+
     <div>
       <Footer></Footer>
     </div>
@@ -26,14 +27,15 @@
 <script>
   import FrameBox from "@/components/frame/FrameBox";
   import MusicShow from "@/components/music/MusicShow";
-  import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
   import Axios from "axios";
-  import  VueEvent from "../../../../config/VueEvent";
+  import LocalStorage from "../../../../config/LocalStorage";
+  import VueEvent from "../../../../config/VueEvent";
+
 
   export default {
-    name: "MusicHomeMyCollect",
-    components: {MusicShow, FrameBox,Footer},
+    name: "SearchResult",
+    components: {MusicShow, FrameBox, Footer},
     data() {
       return {
         currentPage: 1,
@@ -44,30 +46,24 @@
           pageNum: 0,
           userId: 0,
         },
-        songDataList:{content:[]} ,
-        tagName:''
+        //   content:[],
+
+        songDataList: {content: []},
+        tagName: '',
 
       }
-    },beforeCreate() {
+    }, beforeCreate() {
+    }, mounted() {
+      //发布nav导航信息
+      this.songDataList = LocalStorage.get("songDataList");
 
-    }
-    ,mounted() {
-
-
-       this.sourceRequest.userId=LocalStorage.get("userInfo").userId;
-
-      Axios.post(this.constant.musicHomeMyCollect.api,this.sourceRequest).then(response=>{
-        this.songDataList=response.data.result;
-        LocalStorage.set("songDataList", response.data.result);
-        this.totalPage = this.songDataList.totalPages;
-      });
-    },methods:{
+    }, methods: {
       async prePage() {
-        if (this.currentPage >1) {
+        if (this.currentPage > 1) {
           this.currentPage = this.currentPage - 1;
           this.sourceRequest.pageNum = this.sourceRequest.pageNum - 1;
 
-          await Axios.post(this.constant.musicHomeMyCollect.api, this.sourceRequest).then(response => {
+          await Axios.post(this.constant.searchResult.api, this.sourceRequest).then(response => {
             if (response.data.code === 0) {
               this.songDataList.content.splice(0, this.songDataList.content.length);
               this.$nextTick(() => {
@@ -84,7 +80,7 @@
           this.currentPage = this.currentPage + 1;
           this.sourceRequest.pageNum = this.sourceRequest.pageNum + 1;
 
-          Axios.post(this.constant.musicHomeMyCollect.api, this.sourceRequest).then(response => {
+          Axios.post(this.constant.searchResult.api, this.sourceRequest).then(response => {
             if (response.data.code === 0) {
               this.songDataList.content.splice(0, this.songDataList.content.length);
               this.$nextTick(() => {
@@ -129,6 +125,7 @@
   li {
     list-style: none;
   }
+
   .pagePlug {
     width: 200px;
     height: 50px;

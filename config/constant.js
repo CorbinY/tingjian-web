@@ -8,38 +8,45 @@ export default {
   musicHomeRecommend: {
     navCode: 0,
     navName: '今日热点',
-    api:"/api/music/hot/recommend-list"
+    api: "/api/music/hot/recommend-list"
 
   },
   musicHomeLastSong: {
     navCode: 1,
     navName: '新歌速递',
-    api:"/api/music/last/song-list"
+    api: "/api/music/last/song-list"
   },
   musicHomeHotSong: {
     navCode: 2,
     navName: '热门神曲',
-    api:"/api/music/hot/song-list"
+    api: "/api/music/hot/song-list"
   },
   musicHomeSingerSong: {
     navCode: 3,
     navName: '爱豆之家',
-    api:"/api/music"
+    api: "/api/music/singer-song"
   },
   musicHomeMyTingjian: {
     navCode: 4,
     navName: '心动模式',
-    api:"/api/music/my/recommend"
+    api: "/api/music/my/recommend"
   },
   musicHomeMyCollect: {
     navCode: 5,
     navName: '个人私藏',
-    api:"/api/music/my/collect"
+    api: "/api/song/my/collect-song-list"
   },
   musicHomeMyAccount: {
     navCode: 6,
     navName: '账号中心',
-    api:"/api/music/last/song-list"
+    api: "/api/music/last/song-list"
+  },
+  searchResult: {
+    navCode: 7,
+    navName: '搜索结果',
+    api: "/api/music/search"
+  },touristsStatus:{
+    userId:0
   }
 
 }
