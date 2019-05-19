@@ -28,33 +28,33 @@ export default new Router({
     }, {
       //今日热点
       path: '/index',
-      name: 'MusicHomeRecommend',
+      name: '今日热点',
       component: MusicHomeRecommend
     }, {
       //新歌速递
       path: '/last/shelf',
-      name: 'MusicHomeLastSong',
+      name: '新歌速递',
       component: MusicHomeLastSong
     }, {
       //热门神曲
       path: '/hot/song',
-      name: 'MusicHomeHotSong',
+      name: '热门神曲',
       component: MusicHomeHotSong
     },
     //  爱豆之家
     {
       path: '/singer/song',
-      name: 'MusicHomeSingerSong',
+      name: '爱豆之家',
       component: MusicHomeSingerSong
     }, {
       //心动模式
       path: '/tingjian',
-      name: 'MusicHomeMyTingjian',
+      name: '心动模式',
       component: MusicHomeMyTingjian
     }, {
       //个人私藏
       path: '/collect',
-      name: 'MusicHomeMyCollect',
+      name: '个人私藏',
       component: MusicHomeMyCollect
     }, {
       //账号中心
@@ -69,11 +69,11 @@ export default new Router({
     }, {
       //注册
       path: '/add',
-      name: 'AddNusic',
+      name: '添加音乐',
       component: AddMusic
     }, {
       path: '/search',
-      name: 'SearchResult',
+      name: '歌曲搜索',
       component: SearchResult
     }, {
       path: '/search0',
@@ -81,7 +81,7 @@ export default new Router({
       component: SearchResult0
     }, {
       path: '/user-info',
-      name: 'UserInfo',
+      name: '账号中心',
       component: UserInfoShow
     }
   ]

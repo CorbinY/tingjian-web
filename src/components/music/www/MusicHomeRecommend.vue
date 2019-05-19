@@ -1,7 +1,7 @@
 <template>
   <div class="showPageBox">
     <div>
-      <FrameBox></FrameBox>
+      <FrameBox v-if="isFrush"></FrameBox>
     </div>
     <div class="musicList">
       <ul>
@@ -36,6 +36,7 @@
     components: {MusicShow, FrameBox,Footer},
     data() {
       return {
+        isFrush:false,
         currentPage: 1,
         totalPage: 1,
 
@@ -51,12 +52,16 @@
 
     }
     ,mounted() {
-
+      LocalStorage.set('tagName',this.$route.name);
+      this.isFrush=true;
       this.sourceRequest.userId=LocalStorage.get("userInfo").userId;
       Axios.post(this.constant.musicHomeRecommend.api,this.sourceRequest).then(response=>{
         this.songDataList=response.data.result;
-        this.totalPage=this.songDataList.totalPages;
         LocalStorage.set("songDataList", response.data.result);
+        this.totalPage=this.songDataList.totalPages;
+        if (this.totalPage==null||this.totalPage===0){
+          this.totalPage=1;
+        }
       });
     },methods:{
       async prePage() {

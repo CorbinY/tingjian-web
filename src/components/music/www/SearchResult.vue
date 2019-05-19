@@ -1,7 +1,7 @@
 <template>
   <div class="showPageBox">
     <div>
-      <FrameBox></FrameBox>
+      <FrameBox v-if="isFrush"></FrameBox>
     </div>
     <div class="musicList">
       <ul>
@@ -38,6 +38,7 @@
     components: {MusicShow, FrameBox, Footer},
     data() {
       return {
+        isFrush:false,
         currentPage: 1,
         totalPage: 1,
 
@@ -45,6 +46,7 @@
           pageSize: 10,
           pageNum: 0,
           userId: 0,
+          searchValue:''
         },
         //   content:[],
 
@@ -54,8 +56,12 @@
       }
     }, beforeCreate() {
     }, mounted() {
+      LocalStorage.set('tagName',this.$route.name);
+      this.isFrush=true;
       //发布nav导航信息
       this.songDataList = LocalStorage.get("songDataList");
+      this.sourceRequest.searchValue=LocalStorage.get('searchValue');
+      this.totalPage = this.songDataList.totalPages;
 
     }, methods: {
       async prePage() {

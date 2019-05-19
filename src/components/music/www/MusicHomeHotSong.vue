@@ -1,7 +1,7 @@
 <template>
   <div class="showPageBox">
     <div>
-      <FrameBox></FrameBox>
+      <FrameBox v-if="isFrush"></FrameBox>
     </div>
     <div class="musicList">
       <ul>
@@ -36,6 +36,7 @@
     components: {MusicShow, FrameBox, Footer},
     data() {
       return {
+        isFrush:false,
         currentPage: 1,
         totalPage: 1,
 
@@ -51,10 +52,11 @@
       }
     }
     , created() {
-
-
       //从缓存初始化userId
       this.sourceRequest.userId=LocalStorage.get("userInfo").userId;
+      LocalStorage.set('tagName',this.$route.name);
+      this.isFrush=true;
+
 
       Axios.post(this.constant.musicHomeHotSong.api,this.sourceRequest).then(response=>{
         // this.$nextTick(() => {

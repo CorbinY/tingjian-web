@@ -51,7 +51,7 @@
     },
     methods: {
       async getSongList(index) {
-        LocalStorage.set('tagName', this.list[index]);
+       // LocalStorage.set('tagName', this.list[index]);
 
         //清楚缓存歌曲,每次跳转更细歌曲
         LocalStorage.remove("songDataList");

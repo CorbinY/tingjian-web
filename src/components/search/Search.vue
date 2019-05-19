@@ -47,6 +47,7 @@
           if (response.data.code == 0) {
             this.songDataList = response.data.result;
             LocalStorage.set("songDataList", this.songDataList);
+            LocalStorage.set('searchValue',this.sourceRequest.searchValue);
             this.totalPage = this.songDataList.totalPages;
           }
 

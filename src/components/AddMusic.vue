@@ -24,6 +24,7 @@
     name: "AddMusic",
     data() {
       return {
+
         file: '',
         // file2:'',
         music: {
@@ -64,6 +65,9 @@
         })
 
       }
+    },created() {
+     console.log(this.$router.name);
+     alert(this.$route.name);
     }
   }
 </script>

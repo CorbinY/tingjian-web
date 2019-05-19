@@ -35,6 +35,7 @@
     data() {
       return {
         userInfo: '',
+        loginStatus: false,
         loveCollectImg: require('../../assets/images/icon/love_grey.png'),
 
         loveStarStatus: false,
@@ -49,10 +50,10 @@
     },
     methods: {
       //
-      changeLoveStatus(loveCollectStatus) {
+      async changeLoveStatus(loveCollectStatus) {
 
-        var loginStatus = this.checkUserLogin();
-        if (loginStatus === false) {
+       await this.checkUserLogin();
+        if (this.loginStatus === false) {
           return;
         }
 
@@ -87,22 +88,19 @@
 
       async checkUserLogin() {
         var userId = LocalStorage.get('userInfo').userId;
-        let loginStatus = false;
         if (userId === 0) {
           alert("请登录后使用收藏功能");
-          loginStatus = false;
-          return loginStatus;
+          this.loginStatus = false;
         } else {
           var api = '/api/user/check/user/login-status';
           await Axios.post(api, LocalStorage.get("userInfo")).then(response => {
             if (response.data.code === 11003) {
               alert("离线时间过长,登录失效,请先登录再使用收藏功能");
-              loginStatus = false;
+             this.loginStatus = false;
             } else if (response.data.code === 0) {
-              loginStatus = true;
+             this.loginStatus = true;
             }
           });
-          return loginStatus;
         }
       },
       /**

@@ -1,7 +1,7 @@
 <template>
   <div class="showPageBox">
     <div>
-      <FrameBox></FrameBox>
+      <FrameBox v-if="isFrush"></FrameBox>
     </div>
     <div class="musicList">
       <ul>
@@ -38,6 +38,7 @@
     components: {MusicShow, FrameBox, Footer},
     data() {
       return {
+        isFrush:false,
         currentPage: 1,
         totalPage: 1,
 
@@ -52,6 +53,8 @@
       }
     }, beforeCreate() {
     }, mounted() {
+      LocalStorage.set('tagName',this.$route.name);
+      this.isFrush=true;
 
       this.sourceRequest.userId = LocalStorage.get("userInfo").userId;
       Axios.post(this.constant.musicHomeLastSong.api, this.sourceRequest).then(response => {
