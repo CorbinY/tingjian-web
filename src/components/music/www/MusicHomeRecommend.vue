@@ -12,12 +12,12 @@
         </li>
       </ul>
     </div>
-    <div class="pagePlug">
+    <div class="pagePlug" v-if="hiden">
       <button @click="prePage">上一页</button>
       {{currentPage}} / {{totalPage}}
       <button @click="nextPage">下一页</button>
     </div>
-    <div>
+    <div  v-if="hiden">
       <Footer></Footer>
     </div>
   </div>
@@ -36,6 +36,7 @@
     components: {MusicShow, FrameBox,Footer},
     data() {
       return {
+        hiden:false,
         isFrush:false,
         currentPage: 1,
         totalPage: 1,
@@ -49,9 +50,8 @@
         tagName:''
       }
     },beforeCreate() {
-
     }
-    ,mounted() {
+    ,created() {
       LocalStorage.set('tagName',this.$route.name);
       this.isFrush=true;
       this.sourceRequest.userId=LocalStorage.get("userInfo").userId;
@@ -62,7 +62,9 @@
         if (this.totalPage==null||this.totalPage===0){
           this.totalPage=1;
         }
+        this.hiden=true;
       });
+
     },methods:{
       async prePage() {
         if (this.currentPage >1) {
@@ -119,6 +121,7 @@
     position: relative;
     top: -40px;
     left: 10px;
+    min-height: 30vh;
   }
 
   .MusicShowBox {
