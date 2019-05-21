@@ -41,7 +41,6 @@
 
 <script>
   import MusicNamePlug from "@/components/MusicNamePlug";
-  import LocalStorage from "../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
 
   export default {
@@ -52,16 +51,16 @@
     },
     methods: {
       skipToMainPage() {
-        LocalStorage.set('tagName', this.constant.musicHomeRecommend.navName);
+       this.LocalStorage.set('tagName', this.constant.musicHomeRecommend.navName);
         // //请求今日热点歌曲
         // //先使用最新歌曲代替
-        var userId = LocalStorage.get("userInfo").userId;
+        var userId = this.LocalStorage.get("userInfo").userId;
         if (userId == null) {
           //未登录
           var userInfo={
             userId:0
           };
-          LocalStorage.set("userInfo",userInfo );
+          this.LocalStorage.set("userInfo",userInfo );
         }
 
         this.$router.push("/index");

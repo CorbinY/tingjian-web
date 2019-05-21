@@ -35,7 +35,6 @@
 
 <script>
 
-  import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
 
   export default {
@@ -70,13 +69,13 @@
           alert("请输入登录密码");
         }
 
-        LocalStorage.set('tagName',this.constant.musicHomeRecommend.navName);
+        this.LocalStorage.set('tagName',this.constant.musicHomeRecommend.navName);
         var api = "/user/login";
         this.Axios.post(api, this.loginParam).then(response => {
           var code = response.data.code;
           if (code === 0) {
-            LocalStorage.set("userInfo", response.data.result);
-            console.log(LocalStorage.get("userInfo"));
+            this.LocalStorage.set("userInfo", response.data.result);
+            console.log(this.LocalStorage.get("userInfo"));
             this.$router.push("/index");
           } else if (code === 11002) {
             alert("账户或密码错误");

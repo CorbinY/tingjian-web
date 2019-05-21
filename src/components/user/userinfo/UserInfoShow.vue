@@ -32,7 +32,6 @@
 <script>
   import Nav from "@/components/nav/Nav";
   import NavShow from "@/components/nav/NavShow";
-  import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
 
   export default {
@@ -56,7 +55,7 @@
         this.Axios.post(api, this.userInfo).then(response => {
           if (response.data.code === 0) {
             this.userInfo = response.data.result;
-            LocalStorage.set("userInfo", this.userInfo);
+            this.LocalStorage.set("userInfo", this.userInfo);
             alert("更新成功");
           } else {
             alert("系统打了个盹,更新信息失败，请重试!")
@@ -69,7 +68,7 @@
         this.Axios.post(api, this.userInfo).then(response => {
           if (response.data.code === 0) {
             //默认未登录
-            LocalStorage.set("userInfo", this.constant.touristsStatus);
+            this.LocalStorage.set("userInfo", this.constant.touristsStatus);
             this.$router.push("/index");
           } else {
             alert("系统打了个盹,退出登录失败，请重试!")
@@ -77,7 +76,7 @@
         })
       }
     }, mounted() {
-      this.userInfo = LocalStorage.get("userInfo");
+      this.userInfo = this.LocalStorage.get("userInfo");
     }
   }
 </script>

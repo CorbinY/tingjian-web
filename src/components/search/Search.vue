@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import LocalStorage from "../../../config/LocalStorage";
 
   export default {
     name: "Search",
@@ -44,8 +43,8 @@
         await this.Axios.post(this.constant.searchResult.api, this.sourceRequest).then(response => {
           if (response.data.code == 0) {
             this.songDataList = response.data.result;
-            LocalStorage.set("songDataList", this.songDataList);
-            LocalStorage.set('searchValue',this.sourceRequest.searchValue);
+            this.LocalStorage.set("songDataList", this.songDataList);
+            this.LocalStorage.set('searchValue',this.sourceRequest.searchValue);
             this.totalPage = this.songDataList.totalPages;
           }
 
@@ -53,7 +52,7 @@
         this.$router.push("/search0");
       }
     }, mounted() {
-      this.sourceRequest.userId = LocalStorage.get("userInfo").userId;
+      this.sourceRequest.userId = this.LocalStorage.get("userInfo").userId;
     }
 
 

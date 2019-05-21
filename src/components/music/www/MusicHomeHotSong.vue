@@ -26,7 +26,6 @@
 <script>
 import FrameBox from '@/components/frame/FrameBox'
 import MusicShow from '@/components/music/MusicShow'
-import LocalStorage from '../../../../config/LocalStorage'
 import Footer from '@/components/frame/Footer'
 
 export default {
@@ -51,8 +50,8 @@ export default {
   },
   created () {
     // 从缓存初始化userId
-    this.sourceRequest.userId = LocalStorage.get('userInfo').userId
-    LocalStorage.set('tagName', this.$route.name)
+    this.sourceRequest.userId = this.LocalStorage.get('userInfo').userId
+    this.LocalStorage.set('tagName', this.$route.name)
     this.isFrush = true;
 
    this.Axios.post(this.constant.musicHomeHotSong.api, this.sourceRequest).then(response => {
@@ -61,7 +60,7 @@ export default {
       // });
 
       this.songDataList = response.data.result
-      LocalStorage.set('songDataList', response.data.result)
+      this.LocalStorage.set('songDataList', response.data.result)
       this.totalPage = this.songDataList.totalPages
     })
   },
@@ -76,9 +75,9 @@ export default {
             this.songDataList.content.splice(0, this.songDataList.content.length)
             this.$nextTick(() => {
               this.songDataList = response.data.result
-            })
+            });
 
-            LocalStorage.set('songDataList', response.data.result)
+            this.LocalStorage.set('songDataList', response.data.result)
           }
         })
       }
@@ -93,10 +92,10 @@ export default {
             this.songDataList.content.splice(0, this.songDataList.content.length)
             this.$nextTick(() => {
               this.songDataList = response.data.result
-            })
+            });
 
             //     this.content = response.data.result.content;
-            LocalStorage.set('songDataList', response.data.result)
+            this.LocalStorage.set('songDataList', response.data.result)
           }
         })
       }

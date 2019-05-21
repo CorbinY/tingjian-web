@@ -28,7 +28,6 @@
   import FrameBox from "@/components/frame/FrameBox";
   import MusicShow from "@/components/music/MusicShow";
   import Footer from "@/components/frame/Footer";
-  import LocalStorage from "../../../../config/LocalStorage";
 
 
   export default {
@@ -51,14 +50,14 @@
       }
     }, beforeCreate() {
     }, mounted() {
-      LocalStorage.set('tagName',this.$route.name);
+      this.LocalStorage.set('tagName',this.$route.name);
       this.isFrush=true;
 
-      this.sourceRequest.userId = LocalStorage.get("userInfo").userId;
+      this.sourceRequest.userId = this.LocalStorage.get("userInfo").userId;
      this.Axios.post(this.constant.musicHomeLastSong.api, this.sourceRequest).then(response => {
         this.songDataList = response.data.result;
         //   this.content = response.data.result.content;
-        LocalStorage.set("songDataList", response.data.result);
+        this.LocalStorage.set("songDataList", response.data.result);
         this.totalPage = this.songDataList.totalPages;
 
       });
@@ -75,7 +74,7 @@
                 this.songDataList = response.data.result;
               });
 
-              LocalStorage.set("songDataList", response.data.result);
+              this.LocalStorage.set("songDataList", response.data.result);
             }
           })
         }
@@ -93,7 +92,7 @@
               });
 
               //     this.content = response.data.result.content;
-              LocalStorage.set("songDataList", response.data.result);
+              this.LocalStorage.set("songDataList", response.data.result);
             }
           })
 

@@ -28,7 +28,7 @@
     methods: {
       getSongById(idNum) {
         let data = {"id": idNum};
-        var api = "/api/music/id";
+        var api = "/music/id";
         //表单提交--》@RequestParama
         Axios.post(api, qs.stringify(data)
         ).then(response => {

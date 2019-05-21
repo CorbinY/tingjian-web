@@ -25,7 +25,6 @@
 
 <script>
   import MusicPlayMini from "@/components/music/MusicPlayMini";
-  import LocalStorage from "../../../config/LocalStorage";
   import qs from "qs";
 
   export default {
@@ -71,13 +70,13 @@
       changeStarStatus(loveStarStatus) {
         this.loveStarStatus = loveStarStatus;
         if (loveStarStatus === true) {
-          var api = '/api/song/star';
+          var api = '/song/star';
           var starSongResource={
             userId:this.userInfo.userId,
             songId:this.songInfo.songId
           };
 
-          Axios.post(api, qs.stringify(starSongResource)).then(response => {
+         this.Axios.post(api, qs.stringify(starSongResource)).then(response => {
           });
           this.loveStarImg = require('../../assets/images/icon/star.png');
         }/* else {
@@ -86,13 +85,13 @@
       },
 
       async checkUserLogin() {
-        var userId = LocalStorage.get('userInfo').userId;
+        var userId = this.LocalStorage.get('userInfo').userId;
         if (userId === 0) {
           alert("请登录后使用收藏功能");
           this.loginStatus = false;
         } else {
-          var api = '/api/user/check/user/login-status';
-          await Axios.post(api, LocalStorage.get("userInfo")).then(response => {
+          var api = '/user/check/user/login-status';
+          await this.Axios.post(api, this.LocalStorage.get("userInfo")).then(response => {
             if (response.data.code === 11003) {
               alert("离线时间过长,登录失效,请先登录再使用收藏功能");
              this.loginStatus = false;
@@ -109,12 +108,12 @@
        * @returns {Promise<void>}
        */
       async addCollectSong(songId, userId) {
-        let api = '/api/song/add-collect-song';
+        let api = '/song/add-collect-song';
         let collectSongParam = {
           userId: userId,
           songId: songId
         };
-        await Axios.post(api, qs.stringify(collectSongParam)).then(response => {
+        await this.Axios.post(api, qs.stringify(collectSongParam)).then(response => {
           if (response.data.code != 0) {
             alert("收藏失败");
           } else {
@@ -129,12 +128,12 @@
        * @returns {Promise<void>}
        */
       async delCollectSong(songId, userId) {
-        let api = '/api/song/del-collect-song';
+        let api = '/song/del-collect-song';
         let collectSongParam = {
           userId: userId,
           songId: songId
         };
-        await Axios.post(api, qs.stringify(collectSongParam)).then(response => {
+        await this.Axios.post(api, qs.stringify(collectSongParam)).then(response => {
           if (response.data.code != 0) {
             alert("删除收藏失败");
           } else {
@@ -146,8 +145,8 @@
     },
     props: ['songInfoIndex'],
     created() {
-      this.songInfo = LocalStorage.get("songDataList").content[this.songInfoIndex];
-      this.userInfo = LocalStorage.get('userInfo');
+      this.songInfo = this.LocalStorage.get("songDataList").content[this.songInfoIndex];
+      this.userInfo = this.LocalStorage.get('userInfo');
       if (this.songInfo.songCollectStatus==true){
        this.loveCollectImg=require('../../assets/images/icon/love.png');
       }

@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import LocalStorage from "../../../config/LocalStorage";
   import Common from "../../../config/Common";
   import Axios from "axios";
 
@@ -51,10 +50,10 @@
     },
     methods: {
       async getSongList(index) {
-       // LocalStorage.set('tagName', this.list[index]);
+       // this.LocalStorage.set('tagName', this.list[index]);
 
         //清楚缓存歌曲,每次跳转更细歌曲
-        LocalStorage.remove("songDataList");
+        this.LocalStorage.remove("songDataList");
 
         if (index === 0) {
           this.$router.push("/index");
@@ -104,7 +103,7 @@
           alert("请登录后使用本功能");
           this.loginStatus = false;
         } else {
-          var api = '/api/user/check/user/login-status';
+          var api = '/user/check/user/login-status';
           await Axios.post(api, this.userInfo).then(response => {
             if (response.data.code === 11003) {
               alert("离线时间过长,登录失效,请先登录再使用收藏功能");
@@ -117,10 +116,10 @@
       },
 
     }, mounted() {
-      var userInfo = LocalStorage.get("userInfo");
+      var userInfo = this.LocalStorage.get("userInfo");
       if (userInfo == null) {
-        LocalStorage.set("userInfo", this.constant.touristsStatus);
-        userInfo = LocalStorage.get("userInfo");
+        this.LocalStorage.set("userInfo", this.constant.touristsStatus);
+        userInfo = this.LocalStorage.get("userInfo");
       }
       this.userInfo = userInfo;
     }

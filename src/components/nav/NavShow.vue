@@ -5,7 +5,6 @@
 </template>
 
 <script>
-  import LocalStorage from "../../../config/LocalStorage";
 
   export default {
     name: "NavShow",
@@ -17,7 +16,7 @@
       // VueEvent.$on('tagName', function (tagName) {
       //   this.navTag = tagName;
       // });
-      this.navTag = LocalStorage.get('tagName');
+      this.navTag = this.LocalStorage.get('tagName');
 
     },
   }

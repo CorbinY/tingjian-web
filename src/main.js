@@ -5,10 +5,13 @@ import App from './App'
 import router from './router'
 import Constant from '../config/constant'
 import Axios from 'axios'
+import LocalStorage from "../config/LocalStorage";
 
 Vue.prototype.constant = Constant;
 Vue.prototype.Axios=Axios;
+Vue.prototype.LocalStorage=LocalStorage;
 Axios.defaults.baseURL="/api";
+
 /**
  * 用户获取的歌曲列表   localStorage.set("songDataList",songDataList)
  * 用户的信息,不包含密码         localStorage.set("userInfo",userInfo)
