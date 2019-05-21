@@ -79,10 +79,11 @@
   @import '../assets/css/welcome.css';
 
   .homeFooter {
-    width: 100%;
+    width: 1250px;
     min-width: 1250px;
-    float: left;
-    margin-top: -50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -70px;
     background-color: gray;
   }
 

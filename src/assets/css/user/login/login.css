@@ -19,8 +19,11 @@ hr {
 }
 
 #globle {
-  width: 100%;
+  width: 1366px;
+  min-width: 1250px;
   height: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #top_title {
@@ -34,7 +37,7 @@ hr {
   color: white;
 }
 #bgImg{
-  width: 100%;
+  width: 1366px;
   min-width: 1250px;
   height: 500px;
   background: url(../../../images/user/loginBg.png) no-repeat;
@@ -106,8 +109,11 @@ hr {
 #footer{
   position: relative;
   top: 424px;
-  width: 100%;
+  width: 1366px;
+  min-width: 1250px;
   background-color: gray;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #middleBox{

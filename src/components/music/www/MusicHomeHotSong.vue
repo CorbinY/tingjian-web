@@ -24,90 +24,88 @@
 </template>
 
 <script>
-  import FrameBox from "@/components/frame/FrameBox";
-  import MusicShow from "@/components/music/MusicShow";
-  import LocalStorage from "../../../../config/LocalStorage";
-  import Footer from "@/components/frame/Footer";
-  import Axios from "axios";
-  import VueEvent from "../../../../config/VueEvent";
+import FrameBox from '@/components/frame/FrameBox'
+import MusicShow from '@/components/music/MusicShow'
+import LocalStorage from '../../../../config/LocalStorage'
+import Footer from '@/components/frame/Footer'
+import Axios from 'axios'
+import VueEvent from '../../../../config/VueEvent'
 
-  export default {
-    name: "MusicHomeHotSong",
-    components: {MusicShow, FrameBox, Footer},
-    data() {
-      return {
-        isFrush:false,
-        currentPage: 1,
-        totalPage: 1,
+export default {
+  name: 'MusicHomeHotSong',
+  components: {MusicShow, FrameBox, Footer},
+  data () {
+    return {
+      isFrush: false,
+      currentPage: 1,
+      totalPage: 1,
 
-        sourceRequest: {
-          pageSize: 10,
-          pageNum: 0,
-          userId: 0,
-        },
-
-        songDataList: {content: []},
-        tagName:''
-
-      }
-    }
-    , created() {
-      //从缓存初始化userId
-      this.sourceRequest.userId=LocalStorage.get("userInfo").userId;
-      LocalStorage.set('tagName',this.$route.name);
-      this.isFrush=true;
-
-
-      Axios.post(this.constant.musicHomeHotSong.api,this.sourceRequest).then(response=>{
-        // this.$nextTick(() => {
-        //   this.songDataList = response.data.result;
-        // });
-
-         this.songDataList=response.data.result;
-        LocalStorage.set("songDataList", response.data.result);
-        this.totalPage = this.songDataList.totalPages;
-      });
-    },methods:{
-      async prePage() {
-        if (this.currentPage >1) {
-          this.currentPage = this.currentPage - 1;
-          this.sourceRequest.pageNum = this.sourceRequest.pageNum - 1;
-
-          await Axios.post(this.constant.musicHomeHotSong.api, this.sourceRequest).then(response => {
-            if (response.data.code === 0) {
-              this.songDataList.content.splice(0, this.songDataList.content.length);
-              this.$nextTick(() => {
-                this.songDataList = response.data.result;
-              });
-
-              LocalStorage.set("songDataList", response.data.result);
-            }
-          })
-        }
+      sourceRequest: {
+        pageSize: 10,
+        pageNum: 0,
+        userId: 0
       },
-      nextPage() {
-        if (this.currentPage < this.totalPage) {
-          this.currentPage = this.currentPage + 1;
-          this.sourceRequest.pageNum = this.sourceRequest.pageNum + 1;
 
-          Axios.post(this.constant.musicHomeHotSong.api, this.sourceRequest).then(response => {
-            if (response.data.code === 0) {
-              this.songDataList.content.splice(0, this.songDataList.content.length);
-              this.$nextTick(() => {
-                this.songDataList = response.data.result;
-              });
+      songDataList: {content: []},
+      tagName: ''
 
-              //     this.content = response.data.result.content;
-              LocalStorage.set("songDataList", response.data.result);
-            }
-          })
+    }
+  },
+  created () {
+    // 从缓存初始化userId
+    this.sourceRequest.userId = LocalStorage.get('userInfo').userId
+    LocalStorage.set('tagName', this.$route.name)
+    this.isFrush = true
 
-        }
+    Axios.post(this.constant.musicHomeHotSong.api, this.sourceRequest).then(response => {
+      // this.$nextTick(() => {
+      //   this.songDataList = response.data.result;
+      // });
+
+      this.songDataList = response.data.result
+      LocalStorage.set('songDataList', response.data.result)
+      this.totalPage = this.songDataList.totalPages
+    })
+  },
+  methods: {
+    async prePage () {
+      if (this.currentPage > 1) {
+        this.currentPage = this.currentPage - 1
+        this.sourceRequest.pageNum = this.sourceRequest.pageNum - 1
+
+        await Axios.post(this.constant.musicHomeHotSong.api, this.sourceRequest).then(response => {
+          if (response.data.code === 0) {
+            this.songDataList.content.splice(0, this.songDataList.content.length)
+            this.$nextTick(() => {
+              this.songDataList = response.data.result
+            })
+
+            LocalStorage.set('songDataList', response.data.result)
+          }
+        })
+      }
+    },
+    nextPage () {
+      if (this.currentPage < this.totalPage) {
+        this.currentPage = this.currentPage + 1
+        this.sourceRequest.pageNum = this.sourceRequest.pageNum + 1
+
+        Axios.post(this.constant.musicHomeHotSong.api, this.sourceRequest).then(response => {
+          if (response.data.code === 0) {
+            this.songDataList.content.splice(0, this.songDataList.content.length)
+            this.$nextTick(() => {
+              this.songDataList = response.data.result
+            })
+
+            //     this.content = response.data.result.content;
+            LocalStorage.set('songDataList', response.data.result)
+          }
+        })
       }
     }
-
-
   }
+
+}
 </script>
 
 <style scoped>
@@ -116,7 +114,6 @@
     min-width: 1250px;
     margin-left: auto;
     margin-right: auto;
-
 
     background-color: white;
   }

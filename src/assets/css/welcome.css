@@ -8,15 +8,21 @@ html, body {
   font-family: "新宋体";
   color: white;
   font-size: 300%;
-  width: 100%;
+  width: 1250px;
   min-width: 1250px;
   height: 250px;
   background: url("../../assets/images/welcome/introduce/welcomeShow1.jpg") no-repeat;
   background-size: 100% 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #welcomeShow2 {
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: -2px;
+  width: 1250px;
   min-width: 1250px;
   height: 300px;
   background: url("../../assets/images/welcome/introduce/welcomeShow2.jpg") no-repeat;
@@ -40,17 +46,19 @@ hr {
 }
 
 #globle {
-  width: 100%;
+  width: 1250px;
   height: 800px;
   background-color: #080808;
   position: relative;
   top: -50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #top_title {
   position: relative;
   top: 0px;
-  width: 100%;
+  width: 1250px;
   height: 6%;
   font-family: "宋体";
   font-size: 250%;
@@ -119,11 +127,13 @@ hr {
 #singerShow {
   position: relative;
   top: -50px;
-  width: 100%;
+  width: 1250px;
   min-width: 1250px;
   height: 700px;
   background: url("../../assets/images/welcome/introduce/singerShow.png") no-repeat;
   background-size: 100% 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #singerShowIntroduce {
@@ -134,11 +144,13 @@ hr {
   font-size: 150%;
   position: relative;
   top: 0px;
-  width: 100%;
+  width: 1250px;
   min-width: 1250px;
   height: 180px;
   background: url("../../assets/images/welcome/introduce/singerShowIntroduce.png") no-repeat;
   background-size: 100% 100%;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 
