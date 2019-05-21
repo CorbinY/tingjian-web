@@ -26,6 +26,7 @@
   .box{
     width: 1250px;
     min-width: 1250px;
+    /*min-height: 90vh;*/
     margin-left: auto;
     margin-right: auto;
     background-color: white;
