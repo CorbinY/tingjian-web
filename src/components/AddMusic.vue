@@ -18,7 +18,6 @@
 </template>
 
 <script>
-  import Axios from 'axios';
 
   export default {
     name: "AddMusic",
@@ -46,7 +45,7 @@
         console.log(this.file2);
       },
       addMusic() {
-        var api = '/api/admin/add/music';
+        var api = '/admin/add/music';
         event.preventDefault();//取消默认行为
         //创建 formData 对象
         let formData = new FormData();
@@ -60,7 +59,7 @@
         formData.append('songRecommendWord', this.music.songRecommendWord);
         formData.append('songPublishTime', this.music.songPublishTime);
 
-        Axios.post(api, formData).then(function (response) {
+        this.Axios.post(api, formData).then(function (response) {
           console.log("res: ", response);
         })
 

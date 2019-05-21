@@ -12,12 +12,12 @@
         </li>
       </ul>
     </div>
-    <div class="pagePlug" v-if="hiden">
+    <div class="pagePlug">
       <button @click="prePage">上一页</button>
       {{currentPage}} / {{totalPage}}
       <button @click="nextPage">下一页</button>
     </div>
-    <div  v-if="hiden">
+    <div>
       <Footer></Footer>
     </div>
   </div>
@@ -28,15 +28,12 @@
   import MusicShow from "@/components/music/MusicShow";
   import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
-  import Axios from "axios";
-  import  VueEvent from "../../../../config/VueEvent";
 
   export default {
     name: "MusicHomeRecommend",
     components: {MusicShow, FrameBox,Footer},
     data() {
       return {
-        hiden:false,
         isFrush:false,
         currentPage: 1,
         totalPage: 1,
@@ -55,14 +52,13 @@
       LocalStorage.set('tagName',this.$route.name);
       this.isFrush=true;
       this.sourceRequest.userId=LocalStorage.get("userInfo").userId;
-      Axios.post(this.constant.musicHomeRecommend.api,this.sourceRequest).then(response=>{
+      this.Axios.post(this.constant.musicHomeRecommend.api,this.sourceRequest).then(response=>{
         this.songDataList=response.data.result;
         LocalStorage.set("songDataList", response.data.result);
         this.totalPage=this.songDataList.totalPages;
         if (this.totalPage==null||this.totalPage===0){
           this.totalPage=1;
         }
-        this.hiden=true;
       });
 
     },methods:{
@@ -71,7 +67,7 @@
           this.currentPage = this.currentPage - 1;
           this.sourceRequest.pageNum = this.sourceRequest.pageNum - 1;
 
-          await Axios.post(this.constant.musicHomeLastSong.api, this.sourceRequest).then(response => {
+          await this.Axios.post(this.constant.musicHomeLastSong.api, this.sourceRequest).then(response => {
             if (response.data.code === 0) {
               this.songDataList.content.splice(0, this.songDataList.content.length);
               this.$nextTick(() => {
@@ -88,7 +84,7 @@
           this.currentPage = this.currentPage + 1;
           this.sourceRequest.pageNum = this.sourceRequest.pageNum + 1;
 
-          Axios.post(this.constant.musicHomeRecommend.api, this.sourceRequest).then(response => {
+          this.Axios.post(this.constant.musicHomeRecommend.api, this.sourceRequest).then(response => {
             if (response.data.code === 0) {
               this.songDataList.content.splice(0, this.songDataList.content.length);
               this.$nextTick(() => {
@@ -107,35 +103,5 @@
 </script>
 
 <style scoped>
-  .showPageBox {
-    width: 1250px;
-    min-width: 1250px;
-    margin-left: auto;
-    margin-right: auto;
-
-
-    background-color: white;
-  }
-
-  .musicList {
-    position: relative;
-    top: -40px;
-    left: 10px;
-    min-height: 30vh;
-  }
-
-  .MusicShowBox {
-    margin-bottom: 50px;
-
-  }
-
-  li {
-    list-style: none;
-  }
-  .pagePlug {
-    width: 200px;
-    height: 50px;
-    position: relative;
-    left: 250px;
-  }
+@import "../../../assets/css/music/www/mainPage.css";
 </style>

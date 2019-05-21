@@ -41,7 +41,6 @@
 <script>
 
   import Footer from "@/components/frame/Footer";
-  import Axios from "axios";
   import qs from "qs";
   import LocalStorage from "../../../../config/LocalStorage";
 
@@ -60,8 +59,8 @@
     },
     methods: {
       registerUser(){
-        var api='/api/user/register';
-        Axios.post(api,this.registerInfo).then(response=>{
+        var api='/user/register';
+        this.Axios.post(api,this.registerInfo).then(response=>{
           if (response.data.code === 0) {
             LocalStorage.set('')
             this.$router.push("/login");
@@ -82,7 +81,7 @@
         if (isMail == true) {
 
           var api = "/api/user/verify-code";
-          Axios.post(api, qs.stringify(this.registerInfo)).then(response => {
+          this.Axios.post(api, qs.stringify(this.registerInfo)).then(response => {
             if (response.data.code === 0) {
               alert("注册验证码发送成功");
             } else if (response.data.code === 12001) {

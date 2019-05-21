@@ -6,7 +6,6 @@
 
 <script>
   import LocalStorage from "../../../config/LocalStorage";
-  import VueEvent from "../../../config/VueEvent";
 
   export default {
     name: "NavShow",

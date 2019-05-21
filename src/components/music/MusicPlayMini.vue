@@ -9,8 +9,6 @@
 <script>
   import VueAplayer from 'vue-aplayer'
   import qs from 'qs'
-  // import {AxiosInstance as axios} from "axios";
-  import Axios from 'axios';
 
   export default {
     name: "MusicPlayMini",

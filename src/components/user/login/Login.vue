@@ -35,7 +35,6 @@
 
 <script>
 
-  import Axios from "axios";
   import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
 
@@ -72,8 +71,8 @@
         }
 
         LocalStorage.set('tagName',this.constant.musicHomeRecommend.navName);
-        var api = "/api/user/login";
-        Axios.post(api, this.loginParam).then(response => {
+        var api = "/user/login";
+        this.Axios.post(api, this.loginParam).then(response => {
           var code = response.data.code;
           if (code === 0) {
             LocalStorage.set("userInfo", response.data.result);

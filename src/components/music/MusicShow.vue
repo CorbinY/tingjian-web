@@ -26,7 +26,6 @@
 <script>
   import MusicPlayMini from "@/components/music/MusicPlayMini";
   import LocalStorage from "../../../config/LocalStorage";
-  import Axios from 'axios';
   import qs from "qs";
 
   export default {

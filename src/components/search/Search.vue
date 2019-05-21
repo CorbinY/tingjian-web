@@ -11,9 +11,7 @@
 </template>
 
 <script>
-  import Axios from 'axios';
   import LocalStorage from "../../../config/LocalStorage";
-  import VueEvent from "../../../config/VueEvent";
 
   export default {
     name: "Search",
@@ -43,7 +41,7 @@
         await this.search();
       },
       async search() {
-        await Axios.post(this.constant.searchResult.api, this.sourceRequest).then(response => {
+        await this.Axios.post(this.constant.searchResult.api, this.sourceRequest).then(response => {
           if (response.data.code == 0) {
             this.songDataList = response.data.result;
             LocalStorage.set("songDataList", this.songDataList);

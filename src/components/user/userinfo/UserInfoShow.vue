@@ -33,7 +33,6 @@
   import Nav from "@/components/nav/Nav";
   import NavShow from "@/components/nav/NavShow";
   import LocalStorage from "../../../../config/LocalStorage";
-  import Axios from "axios";
   import Footer from "@/components/frame/Footer";
 
   export default {
@@ -53,8 +52,8 @@
       }
     }, methods: {
       editUserInfo() {
-        let api = '/api/user/edit/user-info';
-        Axios.post(api, this.userInfo).then(response => {
+        let api = '/user/edit/user-info';
+        this.Axios.post(api, this.userInfo).then(response => {
           if (response.data.code === 0) {
             this.userInfo = response.data.result;
             LocalStorage.set("userInfo", this.userInfo);
@@ -66,8 +65,8 @@
 
       },
       logOut() {
-        let api = '/api/user/logout';
-        Axios.post(api, this.userInfo).then(response => {
+        let api = '/user/logout';
+        this.Axios.post(api, this.userInfo).then(response => {
           if (response.data.code === 0) {
             //默认未登录
             LocalStorage.set("userInfo", this.constant.touristsStatus);

@@ -28,8 +28,6 @@
   import MusicShow from "@/components/music/MusicShow";
   import LocalStorage from "../../../../config/LocalStorage";
   import Footer from "@/components/frame/Footer";
-  import Axios from "axios";
-  import VueEvent from "../../../../config/VueEvent";
 
   export default {
     name: "MusicHomeSingerSong",
@@ -57,7 +55,7 @@
       LocalStorage.set('tagName',this.$route.name);
       this.isFrush=true;
 
-      Axios.post(this.constant.musicHomeSingerSong.api, this.sourceRequest).then(response => {
+      this.Axios.post(this.constant.musicHomeSingerSong.api, this.sourceRequest).then(response => {
         this.songDataList = response.data.result;
         LocalStorage.set("songDataList", response.data.result);
         this.totalPage = this.songDataList.totalPages;
@@ -72,7 +70,7 @@
           this.currentPage = this.currentPage - 1;
           this.sourceRequest.pageNum = this.sourceRequest.pageNum - 1;
 
-          await Axios.post(this.constant.musicHomeSingerSong.api, this.sourceRequest).then(response => {
+          await this.Axios.post(this.constant.musicHomeSingerSong.api, this.sourceRequest).then(response => {
             if (response.data.code === 0) {
               this.songDataList.content.splice(0, this.songDataList.content.length);
               this.$nextTick(() => {
@@ -89,7 +87,7 @@
           this.currentPage = this.currentPage + 1;
           this.sourceRequest.pageNum = this.sourceRequest.pageNum + 1;
 
-          Axios.post(this.constant.musicHomeSingerSong.api, this.sourceRequest).then(response => {
+          this.Axios.post(this.constant.musicHomeSingerSong.api, this.sourceRequest).then(response => {
             if (response.data.code === 0) {
               this.songDataList.content.splice(0, this.songDataList.content.length);
               this.$nextTick(() => {
@@ -110,34 +108,35 @@
 </script>
 
 <style scoped>
-  .showPageBox {
-    width: 1250px;
-    min-width: 1250px;
-    margin-left: auto;
-    margin-right: auto;
+  @import "../../../assets/css/music/www/mainPage.css";
+  /*.showPageBox {*/
+  /*  width: 1250px;*/
+  /*  min-width: 1250px;*/
+  /*  margin-left: auto;*/
+  /*  margin-right: auto;*/
 
 
-    background-color: white;
-  }
+  /*  background-color: white;*/
+  /*}*/
 
-  .musicList {
-    position: relative;
-    top: -40px;
-    left: 10px;
-  }
+  /*.musicList {*/
+  /*  position: relative;*/
+  /*  top: -40px;*/
+  /*  left: 10px;*/
+  /*}*/
 
-  .MusicShowBox {
-    margin-bottom: 50px;
+  /*.MusicShowBox {*/
+  /*  margin-bottom: 50px;*/
 
-  }
+  /*}*/
 
-  li {
-    list-style: none;
-  }
-  .pagePlug {
-    width: 200px;
-    height: 50px;
-    position: relative;
-    left: 250px;
-  }
+  /*li {*/
+  /*  list-style: none;*/
+  /*}*/
+  /*.pagePlug {*/
+  /*  width: 200px;*/
+  /*  height: 50px;*/
+  /*  position: relative;*/
+  /*  left: 250px;*/
+  /*}*/
 </style>
