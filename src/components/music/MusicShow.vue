@@ -49,7 +49,7 @@
     },
     methods: {
       skip2Detail(){
-        this.LocalStorage.set('detailSingleMusicId',this.LocalStorage.get("songDataList").content[this.songInfoIndex].songId);
+        this.LocalStorage.set('detailSingleMusic',this.LocalStorage.get("songDataList").content[this.songInfoIndex]);
         this.$router.push('/music/detail');
       },
 

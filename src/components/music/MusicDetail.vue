@@ -17,7 +17,7 @@
       </a-player>
     </div>
     <div id="song_img">
-      <img src="/static/image/music/default-play.jpg" width="200px" height="200px">
+      <img :src=songInfo.songImgPath width="200px" height="200px">
     </div>
     <div id="user-action">
       <div id="collect-love">
@@ -97,7 +97,7 @@
           title: '',
           artist: '',
           src: '',
-          // pic: '/static/image/music/default-play.jpg'
+           //pic: '/static/image/music/default-play.jpg'
         }
       }
     },
@@ -105,8 +105,13 @@
       addComment(songId,userId){
         let commentParam={
           songId:this.songInfo.songId,
-          userId:this.userInfo.userId
+          userId:this.userInfo.userId,
+          commentContent:this.commentContent
         };
+        if (this.commentContent==''){
+          alert("评论内容不可为空");
+          return ;
+        }
         this.Axios.post(this.constant.musicDetail.addCommentApi,commentParam).then(response=>{
           if (response.data.code===0){
             alert("发布成功");
@@ -210,13 +215,15 @@
         });
       }
     }, created() {
+      const songId=this.LocalStorage.get('detailSingleMusic').songId;
+
       this.LocalStorage.set('tagName', this.$route.name);
       this.userInfo = this.LocalStorage.get('userInfo');
 
 
       var detailSongParam={
         userId:this.userInfo.userId,
-        songId:this.LocalStorage.get('detailSingleMusicId')
+        songId:songId
       };
       this.Axios.post(this.constant.musicDetail.searchSongBySongIdApi,detailSongParam).then(response=>{
         if (response.data.code==0){
@@ -226,6 +233,7 @@
             this.music.artist = this.songInfo.singerName;
             this.music.title = this.songInfo.songName;
             this.music.src = this.songInfo.songPath;
+            this.isFrush = true;
             if (this.songInfo.songCollectStatus===true){
               this.loveCollectImg=require('../../assets/images/icon/love.png');
             }
@@ -239,7 +247,7 @@
       //获取评论
       var getCommentParam = {
         userId: this.LocalStorage.get('userInfo').userId,
-        songId: this.songInfo.songId
+        songId: songId
       };
       this.Axios.post(this.constant.musicDetail.GetCommentApi, getCommentParam).then(response => {
         if (response.data.code == 0) {
@@ -247,7 +255,7 @@
           this.LocalStorage.set("commentList", this.commentList);
         }
       });
-      this.isFrush = true;
+
 
     }
   }

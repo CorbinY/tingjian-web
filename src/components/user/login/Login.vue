@@ -18,7 +18,8 @@
             <input v-model="loginParam.account" type="text" placeholder="注册邮箱/账号" class="userNameBox">
             <input type="button" class="loginUserNameBtn">
             <br>
-            <input v-model="loginParam.userPwd" type="password" placeholder="安全密码" class="pwdBox" @keyup.enter="enter2Login">
+            <input v-model="loginParam.userPwd" :type=pwdType placeholder="安全密码" class="pwdBox" @keyup.enter="enter2Login">
+            <input type="button" class="pwdControl" :style="{backgroundImage:'url('+pwdStatusImg+')'}" @click="changePwdStatus()">
             <input type="button" class="loginPwdBtn">
             <button class="loginBoxLogin" @click="login()">登录</button>
             <button class="loginBoxRegister" @click="skipToRegister()">注册</button>
@@ -42,6 +43,8 @@
     components: {Footer},
     data() {
       return {
+        pwdType:'password',
+        pwdStatusImg:require('../../../assets/images/user/close-eye.png'),
         loginParam: {
           account: '',
           userPwd: '',
@@ -49,6 +52,12 @@
       }
     },
     methods: {
+      changePwdStatus(){
+        this.pwdType = this.pwdType === 'password' ? 'text' : 'password';
+        this.pwdStatusImg = this.pwdStatusImg == require("@/assets/images/user/close-eye.png") ? require("@/assets/images/user/open-eye.png") : require("@/assets/images/user/close-eye.png");
+      },
+
+
       enter2Login:function(e){
         var keyCode = window.event? e.keyCode:e.which;
         console.log('回车搜索',keyCode,e);
@@ -134,11 +143,23 @@
 
   }
 
+  .pwdControl{
+    position: relative;
+    top: 105px;
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background: none;
+    background-size: 100% 100%;
+    border: none;
+
+  }
   .loginPwdBtn {
     position: relative;
     width: 35px;
     height: 35px;
-    left: 10px;
+    left: -10px;
     top: 118px;
     border: 0px;
     background: url("../../../assets/images/user/pwd.png") no-repeat;

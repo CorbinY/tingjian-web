@@ -19,7 +19,7 @@
           title: this.songInfo.songName,
           artist: this.songInfo.singerName,
           src: this.songInfo.songPath,
-          pic: '/static/image/music/default-play.jpg'
+          pic: this.songInfo.songImgPath
         }
 
       }

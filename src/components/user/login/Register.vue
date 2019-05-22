@@ -18,7 +18,8 @@
             <input v-model="registerInfo.userName" type="text" placeholder="用户名" class="userNameBox">
             <input type="button" class="registerUserNameBtn">
             <br>
-            <input v-model="registerInfo.userPwd" type="password" placeholder="安全密码" class="pwdBox">
+            <input v-model="registerInfo.userPwd" :type="pwdType" placeholder="安全密码"  class="pwdBox">
+            <input type="button" class="pwdControl" :style="{backgroundImage:'url('+pwdStatusImg+')'}" @click="changePwdStatus()">
             <input type="button" class="registerPwdBtn">
             <br>
             <input v-model="registerInfo.userMail" type="text" placeholder="请绑定一个常用邮箱" class="mailBox">
@@ -48,6 +49,8 @@
     components: {Footer},
     data() {
       return {
+        pwdType:'password',
+        pwdStatusImg:require('../../../assets/images/user/close-eye.png'),
         registerInfo: {
           userMail: '',
           userName: '',
@@ -57,6 +60,11 @@
       }
     },
     methods: {
+      changePwdStatus(){
+        this.pwdType = this.pwdType === 'password' ? 'text' : 'password';
+        this.pwdStatusImg = this.pwdStatusImg == require("@/assets/images/user/close-eye.png") ? require("@/assets/images/user/open-eye.png") : require("@/assets/images/user/close-eye.png");
+      },
+
       registerUser(){
         var api='/user/register';
         this.Axios.post(api,this.registerInfo).then(response=>{
@@ -173,11 +181,24 @@
     background-size: 75% 75%;
   }
 
+  .pwdControl{
+    position: relative;
+    top: 75px;
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background: none;
+    background-size: 100% 100%;
+    border: none;
+
+  }
+
   .registerPwdBtn {
     position: relative;
     width: 35px;
     height: 35px;
-    left: 10px;
+    left: -10px;
     top: 85px;
     border: 0px;
     background: url("../../../assets/images/user/pwd.png") no-repeat;
