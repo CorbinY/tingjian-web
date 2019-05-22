@@ -49,7 +49,7 @@
           }
 
         });
-        this.$router.push("/search0");
+        this.$router.push("/search");
       }
     }, mounted() {
       this.sourceRequest.userId = this.LocalStorage.get("userInfo").userId;

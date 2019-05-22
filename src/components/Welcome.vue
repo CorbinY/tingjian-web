@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: -8px">
     <div>
       <div id="welcomeShow1">
         听鉴
@@ -78,7 +78,7 @@
   @import '../assets/css/welcome.css';
 
   .homeFooter {
-    width: 1250px;
+    width: 1366px;
     min-width: 1250px;
     margin-left: auto;
     margin-right: auto;

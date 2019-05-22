@@ -1,0 +1,80 @@
+#global{
+  width: 1250px;
+  min-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  box-shadow: 0 0 4px #ddd;
+
+}
+
+#song_desc{
+  width:800px;
+  position: relative;
+  top: -50px;
+  left: 50px;
+  box-shadow: 0 0 4px #ddd;
+}
+#song_play{
+  width: 800px;
+  position: relative;
+  left: 50px;
+}
+#song_img{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  left: 120px;
+  top: 30px;
+}
+#song_lyrics{
+  width: 400px;
+  height: 500px;
+  background-color: white;
+  position: relative;
+  top: -250px;
+  left: 450px;
+  text-align: center;
+  /*line-height: 400px;*/
+  box-shadow: 0 0 4px #ddd
+}
+
+#user-action {
+  width: 210px;
+  height: 66px;
+  position: relative;
+  top: 40px;
+  left: 120px;
+}
+
+#collect-love {
+  width: 105px;
+  height: 66px;
+  text-align: center;
+}
+
+#to-star {
+  width: 105px;
+  height: 66px;
+  position: relative;
+  top: -66px;
+  left: 105px;
+
+}
+#song_split_comment{
+  position: relative;
+  top: -250px;
+  width: 800px;
+  left: 50px;
+}
+#song_split_comment hr{
+  border-color: #C20C0C;
+}
+#comment{
+  width: 800px;
+  position: relative;
+  left: 50px;
+  top: -200px;
+  background-color: white;
+
+}

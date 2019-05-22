@@ -8,7 +8,7 @@ html, body {
   font-family: "新宋体";
   color: white;
   font-size: 300%;
-  width: 1250px;
+  width: 1366px;
   min-width: 1250px;
   height: 250px;
   background: url("../../assets/images/welcome/introduce/welcomeShow1.jpg") no-repeat;
@@ -22,7 +22,7 @@ html, body {
   margin-right: auto;
   position: relative;
   top: -2px;
-  width: 1250px;
+  width: 1366px;
   min-width: 1250px;
   height: 300px;
   background: url("../../assets/images/welcome/introduce/welcomeShow2.jpg") no-repeat;
@@ -46,7 +46,7 @@ hr {
 }
 
 #globle {
-  width: 1250px;
+  width: 1366px;
   height: 800px;
   background-color: #080808;
   position: relative;
@@ -127,7 +127,7 @@ hr {
 #singerShow {
   position: relative;
   top: -50px;
-  width: 1250px;
+  width: 1366px;
   min-width: 1250px;
   height: 700px;
   background: url("../../assets/images/welcome/introduce/singerShow.png") no-repeat;
@@ -144,7 +144,7 @@ hr {
   font-size: 150%;
   position: relative;
   top: 0px;
-  width: 1250px;
+  width: 1366px;
   min-width: 1250px;
   height: 180px;
   background: url("../../assets/images/welcome/introduce/singerShowIntroduce.png") no-repeat;

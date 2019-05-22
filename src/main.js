@@ -10,7 +10,7 @@ import LocalStorage from "../config/LocalStorage";
 Vue.prototype.constant = Constant;
 Vue.prototype.Axios=Axios;
 Vue.prototype.LocalStorage=LocalStorage;
-Axios.defaults.baseURL="/api";
+Axios.defaults.baseURL="http://localhost:9377";
 
 /**
  * 用户获取的歌曲列表   localStorage.set("songDataList",songDataList)

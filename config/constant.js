@@ -44,8 +44,15 @@ export default {
     navCode: 7,
     navName: '搜索结果',
     api: "/music/search"
-  },touristsStatus:{
-    userId:0
+  },
+  musicDetail:{
+    navCode:8,
+    navName:'单曲空间',
+    addCommentApi:'/comment/add/song-comment',
+    GetCommentApi:'/comment/get/song-comment',
+    searchSongBySongIdApi:'/music/search/song-id'
+  }, touristsStatus: {
+    userId: 0
   }
 
 }

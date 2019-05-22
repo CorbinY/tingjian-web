@@ -1,7 +1,7 @@
 <template>
   <!--音乐展示div-->
-  <div id="music-info-box">
-    <div id="song-name">{{songInfo.songName}}</div>
+  <div id="music-info-box" >
+    <div id="song-name" @click="skip2Detail()">{{songInfo.songName}}</div>
     <hr>
     <div id="recommend-word">{{songInfo.songRecommendWord}}</div>
     <div>
@@ -40,6 +40,7 @@
         loveStarImg: require('../../assets/images/icon/star-grey.png'),
         songInfo: {
           songName: '',
+          singerName:'',
           songId: 0,
           songRecommendWord: '',
           songCollectStatus:false
@@ -47,6 +48,12 @@
       }
     },
     methods: {
+      skip2Detail(){
+        this.LocalStorage.set('detailSingleMusicId',this.LocalStorage.get("songDataList").content[this.songInfoIndex].songId);
+        this.$router.push('/music/detail');
+      },
+
+
       //
       async changeLoveStatus(loveCollectStatus) {
 
@@ -145,6 +152,9 @@
     },
     props: ['songInfoIndex'],
     created() {
+      this.Axios.post()
+
+
       this.songInfo = this.LocalStorage.get("songDataList").content[this.songInfoIndex];
       this.userInfo = this.LocalStorage.get('userInfo');
       if (this.songInfo.songCollectStatus==true){

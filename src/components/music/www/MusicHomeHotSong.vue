@@ -38,7 +38,7 @@ export default {
       totalPage: 1,
 
       sourceRequest: {
-        pageSize: 8,
+        pageSize: 10,
         pageNum: 0,
         userId: 0
       },

@@ -17,7 +17,7 @@
       return {
         music: {
           title: this.songInfo.songName,
-          artist: 'xiesu',
+          artist: this.songInfo.singerName,
           src: this.songInfo.songPath,
           pic: '/static/image/music/default-play.jpg'
         }

@@ -10,16 +10,16 @@ import MusicHomeMyCollect from "@/components/music/www/MusicHomeMyCollect";
 import MusicHomeSingerSong from "@/components/music/www/MusicHomeSingerSong";
 import Register from "@/components/user/login/Register";
 import AddMusic from "@/components/AddMusic";
-import PagePlug from "@/components/frame/PagePlug";
 import SearchResult from "@/components/music/www/SearchResult";
 import UserInfoShow from "@/components/user/userinfo/UserInfoShow";
-import SearchResult0 from "@/components/music/www/SearchResult0";
+import MusicDetail from "@/components/music/MusicDetail";
+import Comment from "@/components/user/Comment";
 
 
 Vue.use(Router);
 
 export default new Router({
-  // mode: 'history',  //去掉url中的#
+   mode: 'history',  //去掉url中的#
   routes: [
     {
       path: '/',
@@ -76,13 +76,17 @@ export default new Router({
       name: '歌曲搜索',
       component: SearchResult
     }, {
-      path: '/search0',
-      name: 'SearchResult0',
-      component: SearchResult0
-    }, {
       path: '/user-info',
       name: '账号中心',
       component: UserInfoShow
+    }, {
+      path:'/music/detail',
+      name:"单曲空间",
+      component:MusicDetail
+    },{
+    path:'/commentContent',
+      name:'sdf',
+      component:Comment
     }
   ]
 })
