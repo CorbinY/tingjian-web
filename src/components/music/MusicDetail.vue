@@ -31,8 +31,8 @@
       </div>
     </div>
     <div id="song_lyrics">
-      <span style="font-family: 'Serif', '萍方粗';font-size: 140%;position: relative;top: 30px;left: 30px"><i>{{songInfo.songName}}</i></span>
-      <span style="position: relative;top: 150px;left: -60px;font-size: small"> {{songInfo.songLyrics}}</span>
+      <div style="font-family: 'Serif', '萍方粗';font-size: 140%; text-align: center;position: relative;top: 20px"><i>{{songInfo.songName}}</i></div>
+      <div style="position: relative;top: 150px;font-size: small;text-align: center" > {{songInfo.songLyrics}}</div>
     </div>
     <div id="song_split_comment">
       <hr>
